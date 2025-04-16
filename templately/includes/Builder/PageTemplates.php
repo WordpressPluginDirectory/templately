@@ -19,9 +19,16 @@ class PageTemplates {
 		// Add a filter to the save post to inject out template into the page cache.
 		// add_filter( 'wp_insert_post_data', [ $this, 'register_templates' ] );
 
+	}
+
+	public function get_template() {
+		if(!empty($this->templates)){
+			return $this->templates;
+		}
 		$this->templates = [
 			self::TEMPLATE_HEADER_FOOTER => __( 'Templately Gutenberg Template', 'templately' ),
 		];
+		return $this->templates;
 	}
 
 	public function set_platform( $platform ): PageTemplates {
@@ -85,6 +92,9 @@ class PageTemplates {
 
 		switch ( $page_template ) {
 			case self::TEMPLATE_HEADER_FOOTER:
+				// removes: Renders a 'viewport' meta tag.
+				remove_action( 'wp_head', '_block_template_viewport_meta_tag', 0 );
+
 				if ( $this->platform === 'gutenberg' ) {
 					$template_path = $file . 'templates/templately-gutenberg-template.php';
 				} else {
@@ -107,7 +117,7 @@ class PageTemplates {
 	}
 
 	public function add_new_template( $posts_templates ) {
-		return array_merge( $posts_templates, $this->templates );
+		return array_merge( $posts_templates, $this->get_template() );
 	}
 
 	public function register_templates( $atts ) {
@@ -128,7 +138,7 @@ class PageTemplates {
 
 			// Now add our template to the list of templates by merging our templates.
 			// with the existing templates array from the cache.
-			$templates = array_merge( $templates, $this->templates );
+			$templates = array_merge( $templates, $this->get_template() );
 
 			// Add the modified cache to allow WordPress to pick it up for listing.
 			// available templates.
