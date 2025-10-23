@@ -2,24 +2,24 @@
 
 namespace Templately\Builder\Types;
 
-class ProductSingle extends Single {
+class FluentProductSingle extends Single {
 	public static function get_type(): string {
-		return 'product_single';
+		return 'fluent_product_single';
 	}
 
 	public static function get_title(): string {
-		return __( 'Product Single', 'templately' );
+		return __( 'Fluent Cart Product Single', 'templately' );
 	}
 
 	public static function get_plural_title(): string {
-		return __( 'Products Single', 'templately' );
+		return __( 'Fluent Cart Products Single', 'templately' );
 	}
 
 	public static function get_properties($import_settings = []): array {
 		$properties = parent::get_properties();
 
-		$properties['condition'] = 'include/singular/product';
-		$properties['builder']   = post_type_exists( 'product' );
+		$properties['condition'] = 'include/singular/fluent-products';
+		$properties['builder']   = post_type_exists( 'fluent-products' );
 
 		return $properties;
 	}
