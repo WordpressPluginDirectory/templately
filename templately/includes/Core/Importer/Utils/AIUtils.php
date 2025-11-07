@@ -237,36 +237,47 @@ class AIUtils {
 	}
 
 	/**
-	 * Get the latest AI process data for the current API key
+	 * Get the latest AI process data for the current API key or user ID
 	 * Used in import_info() to return the most recent AI process
+	 * Priority: api_key first, then user_id as fallback
 	 *
 	 * @return array|null The latest AI process data or null if not found
 	 */
 	public static function get_latest_ai_process_by_api_key($id) {
 		$api_key = Options::get_instance()->get('api_key');
-		if (empty($api_key)) {
-			return null;
-		}
+		$user = Options::get_instance()->get('user');
+		$user_id = isset($user['id']) ? $user['id'] : null;
 
 		$all_ai_process_data = get_option('templately_ai_process_data', []);
 		if (!is_array($all_ai_process_data)) {
 			return null;
 		}
 
-		$api_key_processes = [];
+		$matching_processes = [];
 
-		// Collect processes for current API key
-		foreach ($all_ai_process_data as $process_id => $process_data) {
-			if (is_array($process_data) && isset($process_data['api_key']) && $process_data['api_key'] === $api_key) {
-				$api_key_processes[$process_id] = $process_data;
+		// Priority 1: Try to find processes by API key if available
+		if (!empty($api_key)) {
+			foreach ($all_ai_process_data as $process_id => $process_data) {
+				if (is_array($process_data) && isset($process_data['api_key']) && $process_data['api_key'] === $api_key) {
+					$matching_processes[$process_id] = $process_data;
+				}
 			}
 		}
 
-		if (empty($api_key_processes)) {
+		// Priority 2: If no API key matches found or API key is empty, fallback to user_id
+		if (empty($matching_processes) && !empty($user_id)) {
+			foreach ($all_ai_process_data as $process_id => $process_data) {
+				if (is_array($process_data) && isset($process_data['user_id']) && $process_data['user_id'] === $user_id) {
+					$matching_processes[$process_id] = $process_data;
+				}
+			}
+		}
+
+		if (empty($matching_processes)) {
 			return null;
 		}
 
-		$latest_data = end($api_key_processes);
+		$latest_data = end($matching_processes);
 
 		if($id != $latest_data['pack_id'] && isset($latest_data['imageReplace'])){
 			unset($latest_data['imageReplace']);

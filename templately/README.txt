@@ -1,15 +1,15 @@
-=== Templately – Elementor & Gutenberg Template Library: 5500+ Free & Pro Ready Templates And Cloud! ===
+=== Templately – Elementor & Gutenberg Template Library: 6500+ Free & Pro Ready Templates And Cloud! ===
 Contributors: templately, wpdevteam, re_enter_rupok, Asif2BD, priyomukul, rahat89, alimuzzamanalim, sapanmozammel
 Donate link: https://templately.com
 Tags: templates, elementor template, Gutenberg template, landing page, WoCommerce Templates
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 3.4.2
+Stable tag: 3.4.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Ultimate Free Templates Cloud for WordPress 5000+ Free & Premium Designs for Elementor templates & Gutenberg block templates
+Ultimate Free Templates Cloud for WordPress 6500+ Free & Premium Designs for Elementor templates & Gutenberg block templates
 
 == Description ==
 
@@ -43,13 +43,13 @@ Invite your team to work together while building a website and get your work don
 
 Create landing pages with Elementor, Gutenberg and boost up your page building experience to the next level.
 
-### 🔥 OVER 2800 ELEMENTOR TEMPLATES AVAILABLE ALREADY ###
+### 🔥 OVER 3200 ELEMENTOR TEMPLATES AVAILABLE ALREADY ###
 
-Elementor Templates are the easiest way to build websites fast with the most popular website builder, we have 2800+ templates available already.
+Elementor Templates are the easiest way to build websites fast with the most popular website builder, we have 3200+ templates available already.
 
-### 🔥 READY TO USE 2800+ GUTENBERG TEMPLATES ###
+### 🔥 READY TO USE 3300+ GUTENBERG TEMPLATES ###
 
-Unlock the true possibilities of the Gutenberg block editor with ready-to-use templates from Templately. More than 2800 templates are ready to build your website in one click.
+Unlock the true possibilities of the Gutenberg block editor with ready-to-use templates from Templately. More than 3300 templates are ready to build your website in one click.
 
 ### 👨‍💻 SUPER FRIENDLY SUPPORT ###
 
@@ -139,6 +139,15 @@ Every month we are adding new Elementor templates, along with Gutenberg template
 
 
 == Changelog ==
+= 3.4.3 - 06-11-2025 =
+Added: Filter image replacement in Templately AI.
+Added: Automated email verification in the plugin.
+Fixed: Elementor “Class not found” error.
+Fixed: PHP import error in Templately Core Importer.
+Fixed: LearnDash Archive page CSS loading issue.
+Improved: Pack Details page UI.
+Few minor bug fixes and improvements.
+
 = 3.4.2 - 23-10-2025 =
 Added: FluentCart Template import support.
 Fixed: Design broken issue for single Doc page while importing.

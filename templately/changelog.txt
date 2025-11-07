@@ -1,4 +1,13 @@
 == Changelog ==
+= 3.4.3 - 06-11-2025 =
+Added: Filter image replacement in Templately AI.
+Added: Automated email verification in the plugin.
+Fixed: Elementor “Class not found” error.
+Fixed: PHP import error in Templately Core Importer.
+Fixed: LearnDash Archive page CSS loading issue.
+Improved: Pack Details page UI.
+Few minor bug fixes and improvements.
+
 = 3.4.2 - 23-10-2025 =
 Added: FluentCart Template import support.
 Fixed: Design broken issue for single Doc page while importing.

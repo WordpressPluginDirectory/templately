@@ -149,8 +149,8 @@ class FluentImport {
 			// Store products for action hooks (similar to WPImport::$posts)
 			$this->products = $this->prepare_products_for_hooks( $products );
 
-			// Trigger import_start action (similar to WPImport)
-			do_action( 'import_start', $this );
+			// Trigger Templately-specific import_start action
+			do_action( 'templately_import_start', $this );
 
 			// Import each product
 			foreach ( $products as $product_data ) {

@@ -3,6 +3,7 @@
 namespace Templately\Core\Importer\Runners;
 
 use Exception;
+use Templately\Core\Importer\Exception\NonRetirableErrorException;
 use Templately\Core\Importer\Form;
 use Templately\Core\Importer\Runners\BaseRunner;
 use Templately\Core\Importer\Utils\Utils;
@@ -105,18 +106,23 @@ class Dependencies extends BaseRunner {
 				$plugin_status      = Installer::get_instance()->install($dependency);
 
 				if (!$plugin_status['success']) {
+					$error_message = 'Installation Failed: ' . $dependency['name'];
+					if (!empty($plugin_status['message'])) {
+						$error_message .= ' (' . $plugin_status['message'] . ')';
+					}
+
 					$this->sse_message([
 						'position' => 'plugin',
 						'action'   => 'updateLog',
 						'status'   => 'error',
-						'message'  => 'Installation Failed: ' . $dependency['name'] . ' (' . ($plugin_status['message'] ?? '') . ')',
+						'message'  => $error_message,
 						'type'     => "plugin_{$dependency['plugin_original_slug']}",
 						'progress' => 0
 					]);
 
 					if (isset($dependency['mustHave']) && $dependency['mustHave']) {
 						$this->removeLog('plugin');
-						$this->throw('Installation Failed: ' . $dependency['name'] . ' (' . ($plugin_status['message'] ?? '') . ')');
+						throw new NonRetirableErrorException($error_message);
 					}
 
 					$results['failed'][] = [

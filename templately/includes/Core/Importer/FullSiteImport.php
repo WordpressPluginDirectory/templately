@@ -16,7 +16,7 @@ namespace Templately\Core\Importer;
 use Elementor\Plugin;
 use Error;
 use Exception;
-use Templately\Core\Importer\Exception\NonRetryableErrorException;
+use Templately\Core\Importer\Exception\NonRetirableErrorException;
 use Templately\Core\Importer\Exception\RetryableErrorException;
 use Templately\Core\Importer\Exception\UnknownErrorException;
 use Templately\Core\Importer\Runners\Finalizer;
@@ -646,7 +646,7 @@ class FullSiteImport extends Base {
 		if ($this->dev_mode) {
 			error_log(print_r($message, 1));
 		}
-		throw new NonRetryableErrorException($message);
+		throw new NonRetirableErrorException($message);
 	}
 	/**
 	 * @throws Exception

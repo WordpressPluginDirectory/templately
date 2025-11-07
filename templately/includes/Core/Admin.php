@@ -225,6 +225,7 @@ class Admin extends Base {
 			'url'                => home_url(),
 			'site_url'           => site_url(),
 			'nonce'              => wp_create_nonce( 'templately_nonce' ),
+			'dev_mode'           => defined( 'TEMPLATELY_DEV' ) && constant( 'TEMPLATELY_DEV' ),
 			'rest_args'          => [
 				'nonce'    => wp_create_nonce( 'wp_rest' ),
 				'endpoint' => get_rest_url( null, 'templately/v1/' )
@@ -388,7 +389,7 @@ class Admin extends Base {
 				]
 			] );
 
-			$notice_text  = '<p style="margin-top: 0; margin-bottom: 0px;"><strong>🏷️ Black Friday Special:</strong> Get Templately PRO up to 70% OFF & unlock 5500+ ready WordPress templates now.</p>';
+			$notice_text  = '<p style="margin-top: 0; margin-bottom: 0px;"><strong>🏷️ Black Friday Special:</strong> Get Templately PRO up to 70% OFF & unlock 6500+ ready WordPress templates now.</p>';
 			$notice_text .= sprintf(
 				'<a class="button button-primary" target="_blank" href="%2$s">%1$s</a>',
 				$crown . __('Upgrade to Pro', 'templately'),
@@ -416,7 +417,7 @@ class Admin extends Base {
 				'<p style="margin-top: 0; margin-bottom: 0px;"> 🎁 %s <strong>%s</strong> %s</p>',
 				__('Get', 'templately'),
 				__('Templately PRO', 'templately'),
-				__('with up to 60% OFF & unlock 5500+ ready WordPress templates to power up web design in 2025.', 'templately')
+				__('with up to 60% OFF & unlock 6500+ ready WordPress templates to power up web design in 2025.', 'templately')
 			);
 
 			$holiday_text .= "<div class='wpnotice-button-wrapper'>";

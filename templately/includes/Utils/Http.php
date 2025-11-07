@@ -32,7 +32,7 @@ class Http extends Base {
      * Setting the development mode.
      */
     public function __construct() {
-        $this->dev_mode = defined( 'TEMPLATELY_DEV' ) && TEMPLATELY_DEV;
+        $this->dev_mode = Helper::is_dev_api();
     }
 
     /**
@@ -188,7 +188,7 @@ class Http extends Base {
     }
 
     /**
-     * Formating the self::post() response
+     * Formatting the self::post() response
      *
      * @param mixed $response
      * @param array $args
@@ -199,11 +199,14 @@ class Http extends Base {
             return $response; // Return WP_Error, if it is an error.
         }
 
+        // Check for verification header before processing response body
+        Helper::check_verification_header( $response );
+
         $response_code    = wp_remote_retrieve_response_code( $response );
         $response_message = wp_remote_retrieve_response_message( $response );
 
         /**
-         * Retrive Data from Response Body.
+         * Retrieve Data from Response Body.
          */
         $response = json_decode( wp_remote_retrieve_body( $response ), true );
         /**

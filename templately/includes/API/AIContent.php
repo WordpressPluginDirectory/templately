@@ -280,6 +280,8 @@ class AIContent extends API {
 			// 	}
 			// }
 
+			$user = $this->utils('options')->get('user');
+
 			$ai_process_data[$process_id] = [
 				'name'            => $name,
 				'category'        => $category,
@@ -295,6 +297,7 @@ class AIContent extends API {
 				'content_ids'     => $content_ids,
 				'platform'        => $platform,
 				'api_key'         => $this->api_key,
+				'user_id'         => isset($user['id']) ? $user['id'] : null,
 				'session_id'      => $session_id,        // Store session_id for coordination
 				'imageReplace'    => $image_replace,    // Store session_id for coordination
 			];
@@ -589,6 +592,7 @@ class AIContent extends API {
 						'id' => isset($post['post_id']) ? (int) $post['post_id'] : 0,
 						'url' => isset($post['attachment_url']) ? (string) $post['attachment_url'] : '',
 						'title' => isset($post['post_title']) ? (string) $post['post_title'] : '',
+						'type' => isset($post['attachment_type']) ? (string) $post['attachment_type'] : '',
 					];
 
 					// Extract metadata including dimensions and medium URL
