@@ -1,4 +1,8 @@
 == Changelog ==
+= 3.4.4 - 09-11-2025 =
+Fixed: Template import issue on Multisite.
+Few minor bug fixes and improvements.
+
 = 3.4.3 - 06-11-2025 =
 Added: Filter image replacement in Templately AI.
 Added: Automated email verification in the plugin.
