@@ -97,6 +97,15 @@ class Helper extends Base {
 	 */
 	public static function get_api_url($endpoint): string {
 		$base_url = self::is_dev_api() ? 'https://app.templately.dev' : 'https://app.templately.com';
+
+		/**
+		 * Filter the base URL for development API
+		 *
+		 * @since 3.5.0
+		 * @param string $base_url The default base URL
+		 */
+		$base_url = apply_filters('templately_dev_api_base_url', $base_url);
+
 		return "{$base_url}/api/{$endpoint}";
 	}
 

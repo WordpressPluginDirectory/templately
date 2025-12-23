@@ -167,6 +167,10 @@ abstract class BaseTemplate {
 
 	public function import( array $data ) {
 		if ( $this->is_elementor_template() ) {
+			if ( isset( $data['import_settings']['conditions'] ) ) {
+				unset( $data['import_settings']['conditions'] );
+			}
+
 			/**
 			 * @var Document $document
 			 */

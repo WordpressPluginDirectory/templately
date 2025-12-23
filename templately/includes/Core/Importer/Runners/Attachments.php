@@ -282,13 +282,13 @@ class Attachments extends WPContent {
 		// attachment insert hooks
 		add_filter('wp_insert_attachment_data', [$this, 'before_insert_attachment'], 10, 2);
 		add_action('add_attachment', [$this, 'after_insert_attachment'], 10, 1);
-		// add_filter('wp_update_attachment_metadata', [$this, 'wp_update_attachment_metadata'], 99999, 2);
+		add_filter('wp_update_attachment_metadata', [$this, 'wp_update_attachment_metadata'], 99999, 2);
 	}
 
 	public function pre_http_request($preempt, $parsed_args, $url) {
 		// error_log(print_r([$preempt, $parsed_args, $url], true));
 
-		$this->sse_log('attachments', 'Before downloading attachment: ' . $url, 1, 'eventLog');
+		$this->sse_log('attachments', 'Before downloading attachment: ' . esc_url($url), 1, 'eventLog');
 
 		return $preempt;
 	}

@@ -6,7 +6,7 @@ use Templately\Core\Importer\WPImport;
 use Templately\Utils\Helper;
 
 class GutenbergHelper extends ImportHelper {
-	const IMAGE_URL_PATTERN = '/(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png)/';
+	const IMAGE_URL_PATTERN = '/(https?:\/\/[^\s<>"\']+\.(jpg|jpeg|gif|png|svg|webp|ico|tiff|tif)(?:\?[^\s<>"\']*)?)/i';
 
 	private $template_settings = [];
 	private $forms             = [];

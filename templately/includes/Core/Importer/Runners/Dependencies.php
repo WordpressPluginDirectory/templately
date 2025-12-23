@@ -29,7 +29,7 @@ class Dependencies extends BaseRunner {
 	}
 
 	public function log_message(): string {
-		return __( 'Updating customizer settings.', 'templately' );
+		return __( 'Downloading Dependencies', 'templately' );
 	}
 
 	public function should_run( $data, $imported_data = [] ): bool {
@@ -38,12 +38,40 @@ class Dependencies extends BaseRunner {
 
 	public function import( $data, $imported_data ): array {
 		$dependency_data = [];
+		$progress = $data['progress'] ?? [];
+
   		/**
 		 * Checking & Installing Plugin Dependencies
 		 */
 		$dependency_data['theme']   = $this->install_themes($data);
 		$dependency_data['plugins'] = $this->install_plugins($data);
 
+		/**
+		 * Exit current request to allow WordPress to load newly activated plugins
+		 * On the next AJAX call, WordPress will have loaded all active plugins
+		 */
+		if ( empty( $progress['plugins_installed'] ) ) {
+			// Mark plugins as installed
+			$progress['plugins_installed'] = true;
+			$this->update_session_data( [
+				'progress' => $progress,
+			] );
+
+			// Exit current request and continue in new AJAX call where WordPress has loaded the plugins
+			$this->sse_message( [
+				'type'    => 'continue',
+				'action'  => 'continue',
+				'info'    => 'plugins_installed',
+				'results' => __METHOD__ . '::' . __LINE__,
+			] );
+			exit;
+		}
+
+		// /**
+		//  * Verify that required plugins are active and their classes are loaded
+		//  * This runs in the new AJAX call after WordPress has loaded the plugins
+		//  */
+		// $this->verify_required_plugins_active( $data );
 
 		return  ['dependency_data' => $dependency_data];
 	}
@@ -100,8 +128,6 @@ class Dependencies extends BaseRunner {
 				// $result = [];
 				$this->sse_log( 'plugin', 'Installing Required Plugins: ' . $dependency['name'], floor( ( 100 * $_installed_plugins / $total_plugin ) ) );
 
-				$_dependency        = $dependency;
-				$is_installed       = Helper::is_plugins_installed($dependency['plugin_file']);
 				$dependency['slug'] = $dependency['plugin_original_slug'];
 				$plugin_status      = Installer::get_instance()->install($dependency);
 
@@ -137,6 +163,9 @@ class Dependencies extends BaseRunner {
 				}
 
 				$results['_installed_plugins'] = $_installed_plugins;
+
+				$this->sse_log( 'plugin', 'Installed Required Plugins: ' . $dependency['name'], floor( ( 100 * $_installed_plugins / $total_plugin ) ) );
+
 				return $results;
 			}, null, true);
 
@@ -158,6 +187,55 @@ class Dependencies extends BaseRunner {
 
 
 		return $results;
+	}
+
+	/**
+	 * Verify that required plugins are active and their classes are loaded
+	 *
+	 * This method checks if the required plugins (Elementor or Gutenberg) are properly
+	 * activated and their classes are available. This is crucial because WordPress doesn't
+	 * automatically load newly installed plugins until the next request.
+	 *
+	 * @param array $data Request parameters containing plugin information
+	 * @throws NonRetirableErrorException If required plugin classes are not loaded
+	 */
+	private function verify_required_plugins_active( $data ) {
+		// Get the platform from manifest
+		$platform = $data['manifest']['platform'] ?? '';
+
+		// Check for Elementor platform
+		if ( $platform === 'elementor' ) {
+			// Check if Elementor core classes are loaded
+			if ( ! class_exists( 'Elementor\Plugin' ) && ! class_exists( 'Elementor\Core\Base\Document' ) ) {
+				$error_message = __( 'Elementor plugin is not properly activated. Please refresh the page and try again.', 'templately' );
+				throw new NonRetirableErrorException( $error_message );
+			}
+		}
+
+		// Check for Gutenberg/Essential Blocks platform
+		if ( $platform === 'gutenberg' ) {
+			// Check if Essential Blocks plugin is active
+			if ( ! defined( 'ESSENTIAL_BLOCKS_FILE' ) ) {
+				$error_message = __( 'Essential Blocks plugin is not properly activated. Please refresh the page and try again.', 'templately' );
+				throw new NonRetirableErrorException( $error_message );
+			}
+		}
+
+		// Additional verification: Check if installed plugins are actually active
+		if ( ! empty( $data['plugins'] ) && is_array( $data['plugins'] ) ) {
+			foreach ( $data['plugins'] as $plugin ) {
+				// Only check mustHave plugins
+				if ( isset( $plugin['mustHave'] ) && $plugin['mustHave'] ) {
+					if ( ! is_plugin_active( $plugin['plugin_file'] ) ) {
+						$error_message = sprintf(
+							__( 'Required plugin "%s" is not active. Please refresh the page and try again.', 'templately' ),
+							$plugin['name']
+						);
+						throw new NonRetirableErrorException( $error_message );
+					}
+				}
+			}
+		}
 	}
 
 	private function install_themes($request_params) {

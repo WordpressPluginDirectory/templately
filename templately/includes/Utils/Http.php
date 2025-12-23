@@ -44,6 +44,15 @@ class Http extends Base {
         if ( !$is_live_api && Helper::is_dev_api() ) {
             $this->url = 'https://app.templately.dev/api/plugin';
         }
+
+        /**
+         * Filter the API endpoint URL
+         *
+         * @since 3.5.0
+         * @param string $url The endpoint URL
+         */
+        $this->url = apply_filters('templately_dev_api_endpoint_url', $this->url);
+
         return $this->url;
     }
 
@@ -179,9 +188,9 @@ class Http extends Base {
 
         if ( defined( 'TEMPLATELY_DEBUG_LOG' ) && TEMPLATELY_DEBUG_LOG ) {
             Helper::log( 'Retry Count: ' . $retryCount );
-            Helper::log( 'RAW RESPONSE: ' );
-            Helper::log( $response );
-            Helper::log( 'END RAW RESPONSE' );
+            // Helper::log( 'RAW RESPONSE: ' );
+            // Helper::log( $response );
+            // Helper::log( 'END RAW RESPONSE' );
         }
 
         return $this->maybeErrors( $response, $args );
@@ -231,10 +240,14 @@ class Http extends Base {
                                 }
                             } );
                         } else {
+                            $error_data = [];
+                            if(!empty($error["extensions"]["statusText"])) {
+                                $error_data["statusText"] = $error["extensions"]["statusText"];
+                            }
                             if ( isset( $error['debugMessage'] ) ) {
                                 $wp_error->add( 'templately_graphql_error', $error['debugMessage'] );
                             } else {
-                                $wp_error->add( 'templately_graphql_error', $error['message'] );
+                                $wp_error->add( 'templately_graphql_error', $error['message'], $error_data );
                             }
                         }
                     }

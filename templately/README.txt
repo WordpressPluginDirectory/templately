@@ -3,9 +3,9 @@ Contributors: templately, wpdevteam, re_enter_rupok, Asif2BD, priyomukul, rahat8
 Donate link: https://templately.com
 Tags: templates, elementor template, Gutenberg template, landing page, WoCommerce Templates
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 3.4.4
+Stable tag: 3.4.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -139,6 +139,31 @@ Every month we are adding new Elementor templates, along with Gutenberg template
 
 
 == Changelog ==
+= 3.4.9 - 23-12-2025 =
+Fixed: Template import issue from the template details page.
+Fixed: Security enhancements (reported by Wordfence).
+Improved: Template details page UI for a better user experience.
+Few minor bug fixes & improvements.
+
+= 3.4.8 - 11-12-2025 =
+Fixed: Incorrect image URL mapping in template import
+Few minor bug fixes and improvements
+
+= 3.4.7 - 08-12-2025 =
+Fixed: Template import issue with older Elementor version.
+Few minor bug fixes and improvements
+
+= 3.4.6 - 04-12-2025 =
+Fixed: Header footer css loading issue.
+Fixed: Fatal error: conflict with Event ticket plugin.
+Few minor bug fixes and improvements.
+
+= 3.4.5 - 19-11-2025 =
+Fixed: Site logo preview wasn't working while importing a pack.
+Improved: Templately pack import workflow.
+Fixed: Templately Feedback feature wasn't working.
+Few minor bug fixes and improvements.
+
 = 3.4.4 - 09-11-2025 =
 Fixed: Template import issue on Multisite.
 Few minor bug fixes and improvements.

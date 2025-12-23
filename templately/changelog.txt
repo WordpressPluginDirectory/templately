@@ -1,4 +1,29 @@
 == Changelog ==
+= 3.4.9 - 23-12-2025 =
+Fixed: Template import issue from the template details page.
+Fixed: Security enhancements (reported by Wordfence).
+Improved: Template details page UI for a better user experience.
+Few minor bug fixes & improvements.
+
+= 3.4.8 - 11-12-2025 =
+Fixed: Incorrect image URL mapping in template import
+Few minor bug fixes and improvements
+
+= 3.4.7 - 08-12-2025 =
+Fixed: Template import issue with older Elementor version.
+Few minor bug fixes and improvements
+
+= 3.4.6 - 04-12-2025 =
+Fixed: Header footer css loading issue.
+Fixed: Fatal error: conflict with Event ticket plugin.
+Few minor bug fixes and improvements.
+
+= 3.4.5 - 19-11-2025 =
+Fixed: Site logo preview wasn't working while importing a pack.
+Improved: Templately pack import workflow.
+Fixed: Templately Feedback feature wasn't working.
+Few minor bug fixes and improvements.
+
 = 3.4.4 - 09-11-2025 =
 Fixed: Template import issue on Multisite.
 Few minor bug fixes and improvements.
