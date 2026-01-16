@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Templately
+# Copyright (C) 2026 Templately
 # This file is distributed under the same license as the Templately plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Templately 3.4.9\n"
+"Project-Id-Version: Templately 3.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/templately\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-23T09:12:00+00:00\n"
+"POT-Creation-Date: 2026-01-15T11:55:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: templately\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #. Author of the plugin
 #: templately.php
-#: includes/Core/Admin.php:520
+#: includes/Core/Admin.php:522
 #: includes/Core/Platform/Gutenberg.php:83
 #: views/header.php:7
 #: assets/js/elementor.js:1
@@ -200,10 +200,10 @@ msgid "Successfully saved."
 msgstr ""
 
 #: includes/API/Dependencies.php:92
-#: includes/Core/Admin.php:522
+#: includes/Core/Admin.php:524
 #: includes/Core/Importer/Runners/ElementorContent.php:17
 #: assets/js/templately.js:1
-#: react-src/app/components/core/itemDetails/Breadcrumb.js:22
+#: react-src/app/components/core/itemDetails/Breadcrumb.js:24
 #: react-src/app/components/core/itemDetails/NewSidebar.js:234
 #: react-src/app/components/core/itemDetails/NewSidebar.js:247
 #: react-src/app/header/actionParts/Switcher.js:38
@@ -424,7 +424,7 @@ msgid "Product Search"
 msgstr ""
 
 #: includes/Builder/Conditions/Search.php:15
-#: assets/js/developer.js:37473
+#: assets/js/developer.js:37546
 #: assets/js/templately.js:1
 #: react-src/developer/components/LogViewer.js:1000
 msgid "Search"
@@ -919,75 +919,75 @@ msgctxt "Screen reader text for the items list heading on the post type listing 
 msgid "Templates list"
 msgstr ""
 
-#: includes/Core/Admin.php:316
+#: includes/Core/Admin.php:318
 #, php-format
 msgid "We hope you're enjoying %s! Could you please do us a favor and give us a review on %s to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: includes/Core/Admin.php:325
+#: includes/Core/Admin.php:327
 msgid "Sure, you deserve it!"
 msgstr ""
 
-#: includes/Core/Admin.php:329
+#: includes/Core/Admin.php:331
 #: assets/js/dashboard.js:1
 #: react-src/dashboard/Feedback/Review.js:58
 #: assets/js/dashboard.js:728
 msgid "I already did"
 msgstr ""
 
-#: includes/Core/Admin.php:336
+#: includes/Core/Admin.php:338
 msgid "Maybe Later"
 msgstr ""
 
-#: includes/Core/Admin.php:348
+#: includes/Core/Admin.php:350
 msgid "I need help"
 msgstr ""
 
-#: includes/Core/Admin.php:352
+#: includes/Core/Admin.php:354
 msgid "Never show again"
 msgstr ""
 
-#: includes/Core/Admin.php:409
+#: includes/Core/Admin.php:411
 msgid "Upgrade To PRO"
 msgstr ""
 
-#: includes/Core/Admin.php:415
+#: includes/Core/Admin.php:417
 msgid "I’ll Grab It Later"
 msgstr ""
 
-#: includes/Core/Admin.php:438
+#: includes/Core/Admin.php:440
 msgid "Get"
 msgstr ""
 
-#: includes/Core/Admin.php:439
+#: includes/Core/Admin.php:441
 msgid "Templately PRO"
 msgstr ""
 
-#: includes/Core/Admin.php:440
+#: includes/Core/Admin.php:442
 msgid "with up to 60% OFF & unlock 6500+ ready WordPress templates to power up web design in 2025."
 msgstr ""
 
-#: includes/Core/Admin.php:446
+#: includes/Core/Admin.php:448
 msgid "GET PRO Lifetime Access"
 msgstr ""
 
-#: includes/Core/Admin.php:451
+#: includes/Core/Admin.php:453
 msgid "No, I’ll Pay Full Price Later"
 msgstr ""
 
-#: includes/Core/Admin.php:521
+#: includes/Core/Admin.php:523
 msgid "requires"
 msgstr ""
 
-#: includes/Core/Admin.php:523
+#: includes/Core/Admin.php:525
 msgid "plugin to be installed and activated. Please install Elementor to continue."
 msgstr ""
 
-#: includes/Core/Admin.php:545
+#: includes/Core/Admin.php:547
 msgid "Open settings page"
 msgstr ""
 
-#: includes/Core/Admin.php:546
+#: includes/Core/Admin.php:548
 msgid "Templates Library"
 msgstr ""
 
@@ -1052,17 +1052,17 @@ msgstr ""
 msgid "Maximum tool call iterations reached. Please try again."
 msgstr ""
 
-#: includes/Core/Developer/Developer.php:578
+#: includes/Core/Developer/Developer.php:573
 msgid "No Templately transients found to delete."
 msgstr ""
 
 #. translators: %1$d: number of deleted transients, %2$d: total found transients
-#: includes/Core/Developer/Developer.php:630
+#: includes/Core/Developer/Developer.php:625
 #, php-format
 msgid "Successfully deleted %1$d of %2$d Templately transients."
 msgstr ""
 
-#: includes/Core/Developer/Developer.php:634
+#: includes/Core/Developer/Developer.php:629
 msgid "Failed to delete any transients."
 msgstr ""
 
@@ -1075,7 +1075,7 @@ msgid "Failed to update developer settings."
 msgstr ""
 
 #: includes/Core/Developer/DeveloperSettings.php:93
-#: assets/js/developer.js:35734
+#: assets/js/developer.js:35807
 #: react-src/developer/components/DeveloperSettings.js:205
 msgid "Developer settings saved successfully."
 msgstr ""
@@ -1628,189 +1628,189 @@ msgstr ""
 msgid "Rate Templately"
 msgstr ""
 
-#: assets/js/developer.js:35553
+#: assets/js/developer.js:35626
 #: react-src/developer/components/DeveloperSettings.js:80
 msgid "Settings"
 msgstr ""
 
-#: assets/js/developer.js:35555
+#: assets/js/developer.js:35628
 #: react-src/developer/components/DeveloperSettings.js:82
 msgid "Configure developer constants and options"
 msgstr ""
 
-#: assets/js/developer.js:35558
+#: assets/js/developer.js:35631
 #: react-src/developer/components/DeveloperSettings.js:86
 msgid "AI Chat"
 msgstr ""
 
-#: assets/js/developer.js:35560
+#: assets/js/developer.js:35633
 #: react-src/developer/components/DeveloperSettings.js:88
 msgid "Use the OpenAI assistant with MCP tools"
 msgstr ""
 
-#: assets/js/developer.js:35563
-#: assets/js/developer.js:35953
+#: assets/js/developer.js:35636
+#: assets/js/developer.js:36026
 #: react-src/developer/components/DeveloperSettings.js:92
 #: react-src/developer/components/DeveloperSettings.js:405
 msgid "Cache Management"
 msgstr ""
 
-#: assets/js/developer.js:35565
+#: assets/js/developer.js:35638
 #: react-src/developer/components/DeveloperSettings.js:94
 msgid "Manage cached data, transients, and object cache"
 msgstr ""
 
-#: assets/js/developer.js:35568
-#: assets/js/developer.js:37394
+#: assets/js/developer.js:35641
+#: assets/js/developer.js:37467
 #: react-src/developer/components/DeveloperSettings.js:98
 #: react-src/developer/components/LogViewer.js:927
 msgid "Log Viewer"
 msgstr ""
 
-#: assets/js/developer.js:35570
+#: assets/js/developer.js:35643
 #: react-src/developer/components/DeveloperSettings.js:100
 msgid "View and search WordPress and Templately log files"
 msgstr ""
 
-#: assets/js/developer.js:35573
+#: assets/js/developer.js:35646
 #: react-src/developer/components/DeveloperSettings.js:104
 msgid "API Testing"
 msgstr ""
 
-#: assets/js/developer.js:35575
+#: assets/js/developer.js:35648
 #: react-src/developer/components/DeveloperSettings.js:106
 msgid "Test API endpoints and connections"
 msgstr ""
 
-#: assets/js/developer.js:35578
+#: assets/js/developer.js:35651
 #: react-src/developer/components/DeveloperSettings.js:110
 msgid "Onboarding Test"
 msgstr ""
 
-#: assets/js/developer.js:35580
+#: assets/js/developer.js:35653
 #: react-src/developer/components/DeveloperSettings.js:112
 msgid "Test AI Builder onboarding functionality"
 msgstr ""
 
-#: assets/js/developer.js:35583
+#: assets/js/developer.js:35656
 #: react-src/developer/components/DeveloperSettings.js:116
 msgid "System Info"
 msgstr ""
 
-#: assets/js/developer.js:35585
+#: assets/js/developer.js:35658
 #: react-src/developer/components/DeveloperSettings.js:118
 msgid "View system information and diagnostics"
 msgstr ""
 
-#: assets/js/developer.js:35663
+#: assets/js/developer.js:35736
 #: react-src/developer/components/DeveloperSettings.js:163
 msgid "Failed to load developer settings. Check console for details."
 msgstr ""
 
-#: assets/js/developer.js:35745
+#: assets/js/developer.js:35818
 #: react-src/developer/components/DeveloperSettings.js:213
 msgid "Failed to save developer settings"
 msgstr ""
 
-#: assets/js/developer.js:35776
-#: assets/js/developer.js:35977
+#: assets/js/developer.js:35849
+#: assets/js/developer.js:36050
 #: react-src/developer/components/DeveloperSettings.js:224
 #: react-src/developer/components/DeveloperSettings.js:437
 msgid "Templately Transients"
 msgstr ""
 
-#: assets/js/developer.js:35777
-#: assets/js/developer.js:35957
+#: assets/js/developer.js:35850
+#: assets/js/developer.js:36030
 #: react-src/developer/components/DeveloperSettings.js:225
 #: react-src/developer/components/DeveloperSettings.js:412
 msgid "Object Cache"
 msgstr ""
 
-#: assets/js/developer.js:35778
-#: assets/js/developer.js:35997
+#: assets/js/developer.js:35851
+#: assets/js/developer.js:36070
 #: react-src/developer/components/DeveloperSettings.js:226
 #: react-src/developer/components/DeveloperSettings.js:468
 msgid "OPcache"
 msgstr ""
 
-#: assets/js/developer.js:35779
+#: assets/js/developer.js:35852
 #: react-src/developer/components/DeveloperSettings.js:227
 msgid "All Cache Types"
 msgstr ""
 
-#: assets/js/developer.js:35781
+#: assets/js/developer.js:35854
 #: react-src/developer/components/DeveloperSettings.js:231
 msgid "Clear"
 msgstr ""
 
-#: assets/js/developer.js:35781
+#: assets/js/developer.js:35854
 #: react-src/developer/components/DeveloperSettings.js:232
 msgid "This will clear cached data. This action cannot be undone."
 msgstr ""
 
-#: assets/js/developer.js:35805
+#: assets/js/developer.js:35878
 #: react-src/developer/components/DeveloperSettings.js:253
 msgid "Cache cleared successfully."
 msgstr ""
 
-#: assets/js/developer.js:35819
+#: assets/js/developer.js:35892
 #: react-src/developer/components/DeveloperSettings.js:264
 msgid "Failed to clear cache"
 msgstr ""
 
-#: assets/js/developer.js:35872
+#: assets/js/developer.js:35945
 #: react-src/developer/components/DeveloperSettings.js:310
 msgid "Developer Constants Configuration"
 msgstr ""
 
-#: assets/js/developer.js:35874
+#: assets/js/developer.js:35947
 #: react-src/developer/components/DeveloperSettings.js:312
 msgid "Constants defined in wp-config.php will override these settings and appear disabled below."
 msgstr ""
 
-#: assets/js/developer.js:35926
+#: assets/js/developer.js:35999
 #: react-src/developer/components/DeveloperSettings.js:366
 msgid "Currently controlled by wp-config.php constant:"
 msgstr ""
 
-#: assets/js/developer.js:35933
+#: assets/js/developer.js:36006
 #: assets/js/templately.js:1
 #: react-src/app/display-conditions/Footer.js:10
 #: react-src/developer/components/DeveloperSettings.js:378
 msgid "Saving..."
 msgstr ""
 
-#: assets/js/developer.js:35933
+#: assets/js/developer.js:36006
 #: react-src/developer/components/DeveloperSettings.js:378
 msgid "Save Settings"
 msgstr ""
 
-#: assets/js/developer.js:35935
+#: assets/js/developer.js:36008
 #: react-src/developer/components/DeveloperSettings.js:384
 msgid "wp-config.php Code Snippet"
 msgstr ""
 
-#: assets/js/developer.js:35937
+#: assets/js/developer.js:36010
 #: react-src/developer/components/DeveloperSettings.js:386
 msgid "Copy this code to your wp-config.php file to define these constants:"
 msgstr ""
 
-#: assets/js/developer.js:35955
+#: assets/js/developer.js:36028
 #: react-src/developer/components/DeveloperSettings.js:407
 msgid "Manage all types of cache including transients, object cache, and OPcache."
 msgstr ""
 
-#: assets/js/developer.js:35961
-#: assets/js/developer.js:36001
+#: assets/js/developer.js:36034
+#: assets/js/developer.js:36074
 #: react-src/developer/components/DeveloperSettings.js:416
 #: react-src/developer/components/DeveloperSettings.js:472
 msgid "Status"
 msgstr ""
 
-#: assets/js/developer.js:35975
-#: assets/js/developer.js:35995
-#: assets/js/developer.js:36011
-#: assets/js/developer.js:36025
+#: assets/js/developer.js:36048
+#: assets/js/developer.js:36068
+#: assets/js/developer.js:36084
+#: assets/js/developer.js:36098
 #: react-src/developer/components/DeveloperSettings.js:431
 #: react-src/developer/components/DeveloperSettings.js:462
 #: react-src/developer/components/DeveloperSettings.js:486
@@ -1818,452 +1818,452 @@ msgstr ""
 msgid "Clearing..."
 msgstr ""
 
-#: assets/js/developer.js:35975
+#: assets/js/developer.js:36048
 #: react-src/developer/components/DeveloperSettings.js:431
 msgid "Clear Object Cache"
 msgstr ""
 
-#: assets/js/developer.js:35979
+#: assets/js/developer.js:36052
 #: react-src/developer/components/DeveloperSettings.js:441
 msgid "Templately transients found"
 msgstr ""
 
-#: assets/js/developer.js:35979
+#: assets/js/developer.js:36052
 #: react-src/developer/components/DeveloperSettings.js:443
 msgid "Last cleanup:"
 msgstr ""
 
-#: assets/js/developer.js:35984
+#: assets/js/developer.js:36057
 #: react-src/developer/components/DeveloperSettings.js:448
 msgid "No transients found to delete."
 msgstr ""
 
-#: assets/js/developer.js:35995
+#: assets/js/developer.js:36068
 #: react-src/developer/components/DeveloperSettings.js:462
 msgid "Clear All Templately Transients"
 msgstr ""
 
-#: assets/js/developer.js:36011
+#: assets/js/developer.js:36084
 #: react-src/developer/components/DeveloperSettings.js:486
 msgid "Reset OPcache"
 msgstr ""
 
-#: assets/js/developer.js:36013
-#: assets/js/developer.js:36025
+#: assets/js/developer.js:36086
+#: assets/js/developer.js:36098
 #: react-src/developer/components/DeveloperSettings.js:492
 #: react-src/developer/components/DeveloperSettings.js:502
 msgid "Clear All Cache"
 msgstr ""
 
-#: assets/js/developer.js:36015
+#: assets/js/developer.js:36088
 #: react-src/developer/components/DeveloperSettings.js:494
 msgid "Clear all cache types at once (transients, object cache, and OPcache)."
 msgstr ""
 
-#: assets/js/developer.js:36031
+#: assets/js/developer.js:36104
 #: react-src/developer/components/DeveloperSettings.js:505
 msgid "Warning:"
 msgstr ""
 
-#: assets/js/developer.js:36031
+#: assets/js/developer.js:36104
 #: react-src/developer/components/DeveloperSettings.js:505
 msgid "This action cannot be undone. All cached data will be permanently deleted."
 msgstr ""
 
-#: assets/js/developer.js:36039
+#: assets/js/developer.js:36112
 #: react-src/developer/components/DeveloperSettings.js:516
 msgid "API Testing Tools"
 msgstr ""
 
-#: assets/js/developer.js:36041
+#: assets/js/developer.js:36114
 #: react-src/developer/components/DeveloperSettings.js:518
 msgid "Test API endpoints and connections."
 msgstr ""
 
-#: assets/js/developer.js:36043
+#: assets/js/developer.js:36116
 #: react-src/developer/components/DeveloperSettings.js:522
 msgid "Current API Configuration"
 msgstr ""
 
-#: assets/js/developer.js:36047
+#: assets/js/developer.js:36120
 #: react-src/developer/components/DeveloperSettings.js:526
 msgid "Development API"
 msgstr ""
 
-#: assets/js/developer.js:36054
+#: assets/js/developer.js:36127
 #: react-src/developer/components/DeveloperSettings.js:539
 msgid "Debug Logging"
 msgstr ""
 
-#: assets/js/developer.js:36065
+#: assets/js/developer.js:36138
 #: react-src/developer/components/DeveloperSettings.js:552
 msgid "API testing tools will be added in future updates."
 msgstr ""
 
-#: assets/js/developer.js:36074
+#: assets/js/developer.js:36147
 #: react-src/developer/components/DeveloperSettings.js:563
 msgid "OpenAI Chat Assistant"
 msgstr ""
 
-#: assets/js/developer.js:36076
+#: assets/js/developer.js:36149
 #: react-src/developer/components/DeveloperSettings.js:565
 msgid "Chat with the developer-only assistant backed by your MCP tools to inspect data, search templates, and debug flows."
 msgstr ""
 
-#: assets/js/developer.js:36098
+#: assets/js/developer.js:36171
 #: react-src/developer/components/DeveloperSettings.js:581
 msgid "Please provide at least one parameter (API key or enable redirect)."
 msgstr ""
 
-#: assets/js/developer.js:36119
+#: assets/js/developer.js:36192
 #: react-src/developer/components/DeveloperSettings.js:600
 msgid "Test data set successfully!"
 msgstr ""
 
-#: assets/js/developer.js:36128
+#: assets/js/developer.js:36201
 #: react-src/developer/components/DeveloperSettings.js:609
 msgid "Failed to set test data."
 msgstr ""
 
-#: assets/js/developer.js:36136
+#: assets/js/developer.js:36209
 #: react-src/developer/components/DeveloperSettings.js:614
 msgid "Failed to set test data. Check console for details."
 msgstr ""
 
-#: assets/js/developer.js:36153
+#: assets/js/developer.js:36226
 #: react-src/developer/components/DeveloperSettings.js:624
 msgid "AI Builder Onboarding Test"
 msgstr ""
 
-#: assets/js/developer.js:36155
+#: assets/js/developer.js:36228
 #: react-src/developer/components/DeveloperSettings.js:626
 msgid "This is a temporary testing feature for AI Builder onboarding. Set test data to simulate onboarding scenarios without going through the full authentication flow."
 msgstr ""
 
-#: assets/js/developer.js:36165
+#: assets/js/developer.js:36238
 #: assets/js/templately.js:1
 #: react-src/app/components/admin/SignIn.js:160
 #: react-src/developer/components/DeveloperSettings.js:635
 msgid "API Key"
 msgstr ""
 
-#: assets/js/developer.js:36171
+#: assets/js/developer.js:36244
 #: react-src/developer/components/DeveloperSettings.js:635
 msgid "optional"
 msgstr ""
 
-#: assets/js/developer.js:36181
+#: assets/js/developer.js:36254
 #: react-src/developer/components/DeveloperSettings.js:647
 msgid "Enter test API key (optional)"
 msgstr ""
 
-#: assets/js/developer.js:36185
+#: assets/js/developer.js:36258
 #: react-src/developer/components/DeveloperSettings.js:651
 msgid "Optional: Enter a test API key to set as user meta. This will be stored as _templately_api_key."
 msgstr ""
 
-#: assets/js/developer.js:36189
+#: assets/js/developer.js:36262
 #: react-src/developer/components/DeveloperSettings.js:657
 msgid "Enable Redirect to Onboarding"
 msgstr ""
 
-#: assets/js/developer.js:36205
+#: assets/js/developer.js:36278
 #: react-src/developer/components/DeveloperSettings.js:674
 msgid "When enabled, sets the ai_builder_onboarding_redirect_key option to trigger onboarding redirect."
 msgstr ""
 
-#: assets/js/developer.js:36209
+#: assets/js/developer.js:36282
 #: react-src/developer/components/DeveloperSettings.js:687
 msgid "Setting Test Data..."
 msgstr ""
 
-#: assets/js/developer.js:36209
+#: assets/js/developer.js:36282
 #: react-src/developer/components/DeveloperSettings.js:687
 msgid "Set Test Data"
 msgstr ""
 
-#: assets/js/developer.js:36211
+#: assets/js/developer.js:36284
 #: react-src/developer/components/DeveloperSettings.js:694
 msgid "What This Does"
 msgstr ""
 
-#: assets/js/developer.js:36215
+#: assets/js/developer.js:36288
 #: react-src/developer/components/DeveloperSettings.js:696
 msgid "Optionally sets user meta _templately_api_key with the provided API key (if provided)"
 msgstr ""
 
-#: assets/js/developer.js:36215
+#: assets/js/developer.js:36288
 #: react-src/developer/components/DeveloperSettings.js:697
 msgid "Optionally enables the onboarding redirect by setting ai_builder_onboarding_redirect_key option"
 msgstr ""
 
-#: assets/js/developer.js:36215
+#: assets/js/developer.js:36288
 #: react-src/developer/components/DeveloperSettings.js:698
 msgid "At least one option (API key or redirect) must be selected"
 msgstr ""
 
-#: assets/js/developer.js:36215
+#: assets/js/developer.js:36288
 #: react-src/developer/components/DeveloperSettings.js:699
 msgid "Works with both single-site and multisite WordPress installations"
 msgstr ""
 
-#: assets/js/developer.js:36221
+#: assets/js/developer.js:36294
 #: react-src/developer/components/DeveloperSettings.js:702
 msgid "Note: This is a temporary testing feature and should only be used in development environments."
 msgstr ""
 
-#: assets/js/developer.js:36229
+#: assets/js/developer.js:36302
 #: react-src/developer/components/DeveloperSettings.js:713
 msgid "System Information"
 msgstr ""
 
-#: assets/js/developer.js:36231
+#: assets/js/developer.js:36304
 #: react-src/developer/components/DeveloperSettings.js:715
 msgid "View system information and diagnostics."
 msgstr ""
 
-#: assets/js/developer.js:36233
+#: assets/js/developer.js:36306
 #: react-src/developer/components/DeveloperSettings.js:719
 msgid "Available Constants"
 msgstr ""
 
-#: assets/js/developer.js:36237
+#: assets/js/developer.js:36310
 #: react-src/developer/components/DeveloperSettings.js:728
 msgid "Network Admin Support"
 msgstr ""
 
-#: assets/js/developer.js:36237
+#: assets/js/developer.js:36310
 #: react-src/developer/components/DeveloperSettings.js:730
 msgid "When developer mode is enabled, Full Site Import functionality is available in WordPress Network Admin for multisite installations."
 msgstr ""
 
-#: assets/js/developer.js:36237
+#: assets/js/developer.js:36310
 #: react-src/developer/components/DeveloperSettings.js:733
 msgid "Developer Bundle Information"
 msgstr ""
 
-#: assets/js/developer.js:36241
+#: assets/js/developer.js:36314
 #: react-src/developer/components/DeveloperSettings.js:737
 msgid "Bundle Version"
 msgstr ""
 
-#: assets/js/developer.js:36243
+#: assets/js/developer.js:36316
 #: react-src/developer/components/DeveloperSettings.js:741
 msgid "Initialization Status"
 msgstr ""
 
-#: assets/js/developer.js:36259
+#: assets/js/developer.js:36332
 #: react-src/developer/components/DeveloperSettings.js:1638
 msgid "Developer Settings"
 msgstr ""
 
-#: assets/js/developer.js:36261
+#: assets/js/developer.js:36334
 #: react-src/developer/components/DeveloperSettings.js:1640
 msgid "These settings are only available in development builds and provide advanced debugging and development tools."
 msgstr ""
 
-#: assets/js/developer.js:37037
+#: assets/js/developer.js:37110
 #: react-src/developer/components/LogViewer.js:474
 msgid "Clear Log File?"
 msgstr ""
 
-#: assets/js/developer.js:37037
+#: assets/js/developer.js:37110
 #: react-src/developer/components/LogViewer.js:475
 msgid "This will permanently delete all content in:"
 msgstr ""
 
-#: assets/js/developer.js:37037
+#: assets/js/developer.js:37110
 #: react-src/developer/components/LogViewer.js:476
 msgid "This action cannot be undone."
 msgstr ""
 
-#: assets/js/developer.js:37396
+#: assets/js/developer.js:37469
 #: react-src/developer/components/LogViewer.js:929
 msgid "View and search WordPress and Templately log files in real-time."
 msgstr ""
 
-#: assets/js/developer.js:37409
+#: assets/js/developer.js:37482
 #: react-src/developer/components/LogViewer.js:937
 msgid "Error:"
 msgstr ""
 
-#: assets/js/developer.js:37419
+#: assets/js/developer.js:37492
 #: react-src/developer/components/LogViewer.js:941
 msgid "Try reducing the chunk size or refreshing the page."
 msgstr ""
 
-#: assets/js/developer.js:37425
+#: assets/js/developer.js:37498
 #: react-src/developer/components/LogViewer.js:946
 msgid "Please check your connection and try again."
 msgstr ""
 
-#: assets/js/developer.js:37438
+#: assets/js/developer.js:37511
 #: react-src/developer/components/LogViewer.js:961
 msgid "Dismiss error"
 msgstr ""
 
-#: assets/js/developer.js:37443
+#: assets/js/developer.js:37516
 #: react-src/developer/components/LogViewer.js:971
 msgid "Log File:"
 msgstr ""
 
-#: assets/js/developer.js:37452
+#: assets/js/developer.js:37525
 #: react-src/developer/components/LogViewer.js:978
 msgid "Select a log file..."
 msgstr ""
 
-#: assets/js/developer.js:37461
+#: assets/js/developer.js:37534
 #: react-src/developer/components/LogViewer.js:990
 msgid "Search in log..."
 msgstr ""
 
-#: assets/js/developer.js:37481
+#: assets/js/developer.js:37554
 #: react-src/developer/components/LogViewer.js:1011
 msgid "Auto-refresh"
 msgstr ""
 
-#: assets/js/developer.js:37502
+#: assets/js/developer.js:37575
 #: react-src/developer/components/LogViewer.js:1035
 msgid "Reverse order"
 msgstr ""
 
-#: assets/js/developer.js:37510
+#: assets/js/developer.js:37583
 #: react-src/developer/components/LogViewer.js:1046
 msgid "Enhanced view"
 msgstr ""
 
-#: assets/js/developer.js:37520
-#: assets/js/developer.js:37617
-#: assets/js/developer.js:37642
+#: assets/js/developer.js:37593
+#: assets/js/developer.js:37690
+#: assets/js/developer.js:37715
 #: react-src/developer/components/LogViewer.js:1061
 #: react-src/developer/components/LogViewer.js:1170
 #: react-src/developer/components/LogViewer.js:1195
 msgid "Loading..."
 msgstr ""
 
-#: assets/js/developer.js:37520
+#: assets/js/developer.js:37593
 #: react-src/developer/components/LogViewer.js:1061
 msgid "Refresh"
 msgstr ""
 
-#: assets/js/developer.js:37529
+#: assets/js/developer.js:37602
 #: react-src/developer/components/LogViewer.js:1070
 msgid "Clear Log"
 msgstr ""
 
-#: assets/js/developer.js:37533
+#: assets/js/developer.js:37606
 #: react-src/developer/components/LogViewer.js:1074
 msgid "Chunk Size:"
 msgstr ""
 
-#: assets/js/developer.js:37557
+#: assets/js/developer.js:37630
 #: react-src/developer/components/LogViewer.js:1096
 msgid "Memory:"
 msgstr ""
 
-#: assets/js/developer.js:37564
+#: assets/js/developer.js:37637
 #: react-src/developer/components/LogViewer.js:1104
 msgid "Clear cache to free memory"
 msgstr ""
 
-#: assets/js/developer.js:37565
+#: assets/js/developer.js:37638
 #: react-src/developer/components/LogViewer.js:1106
 msgid "Clear Cache"
 msgstr ""
 
-#: assets/js/developer.js:37567
+#: assets/js/developer.js:37640
 #: react-src/developer/components/LogViewer.js:1116
 msgid "Size:"
 msgstr ""
 
-#: assets/js/developer.js:37567
+#: assets/js/developer.js:37640
 #: react-src/developer/components/LogViewer.js:1117
 msgid "Modified:"
 msgstr ""
 
-#: assets/js/developer.js:37567
+#: assets/js/developer.js:37640
 #: react-src/developer/components/LogViewer.js:1118
 msgid "Type:"
 msgstr ""
 
-#: assets/js/developer.js:37572
+#: assets/js/developer.js:37645
 #: react-src/developer/components/LogViewer.js:1126
 msgid "Search Results:"
 msgstr ""
 
-#: assets/js/developer.js:37572
+#: assets/js/developer.js:37645
 #: react-src/developer/components/LogViewer.js:1126
 msgid "matches"
 msgstr ""
 
-#: assets/js/developer.js:37582
+#: assets/js/developer.js:37655
 #: react-src/developer/components/LogViewer.js:1130
 msgid "Line"
 msgstr ""
 
-#: assets/js/developer.js:37604
+#: assets/js/developer.js:37677
 #: react-src/developer/components/LogViewer.js:1155
 msgid "Loading chunk..."
 msgstr ""
 
-#: assets/js/developer.js:37617
+#: assets/js/developer.js:37690
 #: react-src/developer/components/LogViewer.js:1171
 msgid "Log file is empty"
 msgstr ""
 
-#: assets/js/developer.js:37617
+#: assets/js/developer.js:37690
 #: react-src/developer/components/LogViewer.js:1171
 msgid "Select a log file to view its contents"
 msgstr ""
 
-#: assets/js/developer.js:37637
+#: assets/js/developer.js:37710
 #: react-src/developer/components/LogViewer.js:1194
 msgid "Chunk"
 msgstr ""
 
-#: assets/js/developer.js:37637
-#: assets/js/developer.js:37707
+#: assets/js/developer.js:37710
+#: assets/js/developer.js:37780
 #: react-src/developer/components/LogViewer.js:1194
 #: react-src/developer/components/LogViewer.js:1258
 msgid "of"
 msgstr ""
 
-#: assets/js/developer.js:37654
+#: assets/js/developer.js:37727
 #: react-src/developer/components/LogViewer.js:1203
 msgid "First chunk"
 msgstr ""
 
-#: assets/js/developer.js:37659
+#: assets/js/developer.js:37732
 #: react-src/developer/components/LogViewer.js:1211
 msgid "Previous chunk"
 msgstr ""
 
-#: assets/js/developer.js:37664
+#: assets/js/developer.js:37737
 #: react-src/developer/components/LogViewer.js:1219
 msgid "Next chunk"
 msgstr ""
 
-#: assets/js/developer.js:37671
+#: assets/js/developer.js:37744
 #: react-src/developer/components/LogViewer.js:1227
 msgid "Last chunk"
 msgstr ""
 
-#: assets/js/developer.js:37684
+#: assets/js/developer.js:37757
 #: react-src/developer/components/LogViewer.js:1234
 msgid "Go to chunk:"
 msgstr ""
 
-#: assets/js/developer.js:37707
+#: assets/js/developer.js:37780
 #: react-src/developer/components/LogViewer.js:1258
 msgid "Showing"
 msgstr ""
 
-#: assets/js/developer.js:37707
+#: assets/js/developer.js:37780
 #: react-src/developer/components/LogViewer.js:1258
 msgid "lines"
 msgstr ""
 
-#: assets/js/developer.js:37707
+#: assets/js/developer.js:37780
 #: react-src/developer/components/LogViewer.js:1259
 msgid "more available"
 msgstr ""
@@ -2855,8 +2855,6 @@ msgid "Elementor not installed."
 msgstr ""
 
 #: assets/js/templately.js:1
-#: react-src/app/components/core/itemDetails/NewBanner.js:81
-#: react-src/app/components/core/itemDetails/NewBanner.js:107
 #: react-src/app/components/core/itemDetails/Packs/import-parts/AIContent.js:400
 #: react-src/utils/savedTemplatesContextMenu.js:91
 msgid "Preview"
@@ -4227,7 +4225,7 @@ msgstr ""
 
 #: assets/js/templately.js:1
 #: react-src/app/components/core/itemDetails/Banner.js:28
-#: react-src/app/components/core/itemDetails/NewBanner.js:79
+#: react-src/app/components/core/itemDetails/NewBanner.js:159
 #: react-src/app/components/core/itemDetails/Packs/PacksHeader.js:112
 msgid "Live Demo"
 msgstr ""
@@ -4540,7 +4538,7 @@ msgid "Build with Templately AI"
 msgstr ""
 
 #: assets/js/templately.js:1
-#: react-src/app/components/core/itemDetails/Breadcrumb.js:23
+#: react-src/app/components/core/itemDetails/Breadcrumb.js:25
 #: react-src/app/components/core/itemDetails/NewSidebar.js:253
 #: react-src/app/components/core/itemDetails/NewSidebar.js:266
 #: react-src/app/header/actionParts/Switcher.js:47
@@ -4589,7 +4587,7 @@ msgid "Tags"
 msgstr ""
 
 #: assets/js/templately.js:1
-#: react-src/app/components/core/itemDetails/Breadcrumb.js:12
+#: react-src/app/components/core/itemDetails/Breadcrumb.js:14
 msgid "Home"
 msgstr ""
 

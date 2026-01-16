@@ -1,4 +1,9 @@
 == Changelog ==
+= 3.5.0 - 15-01-2026 =
+Added: Responsive mode controller in Live Demo page with a top bar.
+Improved: Template pack details page UI.
+Few minor bug fixes and improvements.
+
 = 3.4.9 - 23-12-2025 =
 Fixed: Template import issue from the template details page.
 Fixed: Security enhancements (reported by Wordfence).

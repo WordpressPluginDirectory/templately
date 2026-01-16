@@ -5,7 +5,7 @@ Tags: templates, elementor template, Gutenberg template, landing page, WoCommerc
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 3.4.9
+Stable tag: 3.5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -139,6 +139,11 @@ Every month we are adding new Elementor templates, along with Gutenberg template
 
 
 == Changelog ==
+= 3.5.0 - 15-01-2026 =
+Added: Responsive mode controller in Live Demo page with a top bar.
+Improved: Template pack details page UI.
+Few minor bug fixes and improvements.
+
 = 3.4.9 - 23-12-2025 =
 Fixed: Template import issue from the template details page.
 Fixed: Security enhancements (reported by Wordfence).

@@ -152,6 +152,7 @@ class TemplateLoader {
 				foreach ( $wp_styles->queue as $style ) {
 					if ( is_string( $style ) && ! $wp_styles->query( $style, 'done' ) ) {
 						$wp_styles->do_item( $style );
+						$wp_styles->done[] = $style;
 					}
 				}
 			}

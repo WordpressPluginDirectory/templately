@@ -270,6 +270,8 @@ class Admin extends Base {
 		$templately = apply_filters( 'templately_admin_localized_data', $templately );
 
 		templately()->assets->localize( $_localize_handle, 'templately', $templately );
+
+		do_action( 'templately_admin_scripts', $hook );
 	}
 
 	/**
