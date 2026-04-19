@@ -57,6 +57,7 @@ class Gutenberg extends Platform {
     public function scripts(){
         $this->is_gutenberg_active = true;
         templately()->assets->enqueue( 'templately-gutenberg', 'css/gutenberg.css' );
+        templately()->assets->enqueue( 'templately-tailwind', 'css/tailwind.css', ['templately-gutenberg'] );
         templately()->assets->enqueue( 'templately-gutenberg', 'js/gutenberg.js' );
         templately()->admin->scripts( 'gutenberg' );
     }
@@ -110,11 +111,16 @@ class Gutenberg extends Platform {
      *
      * @return array|WP_Error array on success, WP_Error on failure.
      */
-	public function create_page( $id, $title, $importer = null ){
+	public function create_page( $id, $title, $importer = null, $settings = [] ){
 		$post_data = $inserted_ID = $importer->get_content( $id, 'gutenberg' );
 
 		if( is_wp_error( $inserted_ID ) ) {
 			return $inserted_ID;
+		}
+
+		if ( ! empty( $settings ) && ! empty( $inserted_ID['content'] ) && is_string( $inserted_ID['content'] ) ) {
+			$inserted_ID['content'] = \Templately\Core\Importer\Utils\GutenbergSettingsMerger::merge( $inserted_ID['content'], $settings );
+			$post_data['content'] = $inserted_ID['content'];
 		}
 
 		if ( ! empty( $inserted_ID['content'] ) ) {

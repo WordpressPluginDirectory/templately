@@ -3,9 +3,9 @@ Contributors: templately, wpdevteam, re_enter_rupok, Asif2BD, priyomukul, rahat8
 Donate link: https://templately.com
 Tags: templates, elementor template, Gutenberg template, landing page, WoCommerce Templates
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.2
-Stable tag: 3.5.1
+Stable tag: 3.6.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -153,6 +153,32 @@ Visit [WPDeveloper](https://wpdeveloper.com/) to learn more about how to do bett
 
 
 == Changelog ==
+= 3.6.1 - 19-04-2026 =
+Fixed: Section importing was failing in Elementor.
+Few minor bug fixes and improvements.
+
+= 3.6.0 - 15-04-2026 =
+Revamped: Entire Template Library experience
+Few minor bug fixes and improvements
+
+= 3.5.4 - 07-04-2026 =
+Hotfix: Resolved release issue from the previous version.
+
+= 3.5.3 - 07-04-2026 =
+Fixed: Logo width changing unexpectedly after import.
+Fixed: Header displaying incorrectly after import.
+Fixed: Single page designs not applying properly after import.
+Fixed: Templately library not loading in the Gutenberg Editor when the Gutenberg plugin is active.
+Fixed: Design inconsistencies occurring during site migration.
+Improved: Single template import process for a smoother experience.
+Few minor bug fixes and improvements.
+
+= 3.5.2 - 25-02-2026 =
+Improved: AI logo generation experience.
+Fixed: Header menu not assigned properly after pack import.
+Fixed: Slider not working correctly after importing a pack or page.
+Few minor bug fixes and improvements.
+
 = 3.5.1 - 19-02-2026 =
 Added: Google social login.
 Added: Site Logo Generate using AI.

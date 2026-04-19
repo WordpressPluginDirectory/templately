@@ -9,6 +9,7 @@ use Elementor\Core\Settings\Page\Model;
 
 use Elementor\Plugin as ElementorPlugin;
 use Elementor\TemplateLibrary\Source_Local as ElementorLocal;
+use Templately\Core\Importer\Utils\Utils;
 
 class Elementor extends ElementorLocal {
 	/**
@@ -21,6 +22,7 @@ class Elementor extends ElementorLocal {
 	 * @return array Remote Template data.
 	 */
 	public function get_data( array $args ) {
+		Utils::add_gd_editor_filter();
 		ElementorPlugin::$instance->editor->set_edit_mode( true );
 
 		$args['content'] = $this->replace_elements_ids( $args['content'] );
@@ -93,9 +95,9 @@ class Elementor extends ElementorLocal {
 		];
 
 		$template_data = wp_parse_args( $template_data, $defaults );
-
+		$type = $template_data['type'] == 'block' ? 'section' : $template_data['type'];
 		$document = ElementorPlugin::$instance->documents->create(
-			$template_data['type'],
+			$type,
 			[
 				'post_title' => $template_data['post_title'],
 				'post_status' => $template_data['status'],

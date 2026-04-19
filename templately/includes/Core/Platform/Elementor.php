@@ -48,6 +48,7 @@ class Elementor extends Platform {
 	 */
 	public function styles() {
 		templately()->assets->enqueue( 'templately-elementor-preview', 'css/elementor.css' );
+		templately()->assets->enqueue( 'templately-tailwind', 'css/tailwind.css', ['templately-elementor-preview'] );
 	}
 
 	/**
@@ -56,6 +57,7 @@ class Elementor extends Platform {
 	 */
 	public function scripts() {
 		templately()->assets->enqueue( 'templately-elementor', 'css/elementor.css' );
+		templately()->assets->enqueue( 'templately-tailwind', 'css/tailwind.css', ['templately-elementor'] );
 		templately()->assets->enqueue( 'templately-elementor', 'js/elementor.js', [ 'jquery' ], true );
 		templately()->admin->scripts( 'elementor' );
 	}
@@ -75,7 +77,7 @@ class Elementor extends Platform {
 	 *
 	 * @return WP_Error|void
 	 */
-	protected function is_eligible( $template, $types = [ 'page', 'section' ] ) {
+	protected function is_eligible( $template, $types = [ 'page', 'section','block' ] ) {
 		if ( ! Helper::is_plugin_active( 'elementor-pro/elementor-pro.php' ) &&
 			isset( $template['type'] ) &&
 			! in_array( $template['type'], $types, true )
@@ -241,11 +243,15 @@ class Elementor extends Platform {
 	 *
 	 * @return array|WP_Error array on success, WP_Error on failure.
 	 */
-	public function create_page( $id, $title, $importer = null ) {
+	public function create_page( $id, $title, $importer = null, $settings = [] ) {
 		$template_data = $importer->get_content( $id );
 
 		if ( is_wp_error( $template_data ) ) {
 			return $template_data;
+		}
+
+		if ( ! empty( $settings ) && ! empty( $template_data['content'] ) && is_array( $template_data['content'] ) ) {
+			$template_data['content'] = \Templately\Core\Importer\Utils\ElementorSettingsMerger::merge( $template_data['content'], $settings );
 		}
 
 		$importer      = new ElementorImporter;
@@ -282,11 +288,19 @@ class Elementor extends Platform {
 		];
 	}
 
-	public function import_in_library( $id, $importer = null ) {
+	public function import_in_library( $id, $importer = null, $settings = [] ) {
 		$template_data = $importer->get_content( $id, 'elementor', 'remote' );
 
 		if ( is_wp_error( $template_data ) ) {
 			return $template_data;
+		}
+
+		if ( ! empty( $settings ) && ! empty( $template_data['content'] ) && is_array( $template_data['content'] ) ) {
+			$template_data['content'] = \Templately\Core\Importer\Utils\ElementorSettingsMerger::merge( $template_data['content'], $settings );
+		}
+
+		if(trim($template_data['type']) == 'block'){
+			$template_data['type'] = 'section';
 		}
 
 		$importer          = new ElementorImporter;
