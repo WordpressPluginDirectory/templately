@@ -36,6 +36,10 @@ class Templates extends BaseRunner {
 		$templates = $this->manifest['templates'];
 		$path      = $this->dir_path . 'templates' . DIRECTORY_SEPARATOR;
 
+		if ( $this->manifest['platform'] === 'elementor' ) {
+			$this->json->set_source_url( $this->manifest['site'] ?? '' );
+		}
+
 		$_extra_pages = [];
 
 
@@ -49,8 +53,12 @@ class Templates extends BaseRunner {
 				$results['templates']['succeed'][ $id ]   = $import['id'];
 				$results['templates']['template_types'][] = $template_settings['type'];
 
+				if ( ! empty( $import['__link_rewrites'] ) ) {
+					$results['templates']['__link_rewrites'][ $id ] = true;
+				}
+
 				if ( $template_settings['type'] === 'archive' || $template_settings['type'] === 'product_archive' || $template_settings['type'] === 'course_archive' ) {
-					$page_id = $this->create_archive_page( $template_settings, $this->manifest['platform'] );
+					$page_id = Utils::create_archive_page( $template_settings, $this->manifest['platform'], $this->manifest );
 					if ( $page_id && isset($template_settings['page_settings']['archive_page_id']) ) {
 						$archive_page_id = $template_settings['page_settings']['archive_page_id'];
 						$results['archive_settings'][$archive_page_id] = [
@@ -61,7 +69,7 @@ class Templates extends BaseRunner {
 					}
 				}
 				else if($template_settings['type'] === 'fluent_product_single'){
-					$this->create_page_template();
+					Utils::create_page_template( $this->manifest['platform'] );
 				}
 
 			} else {
@@ -129,6 +137,15 @@ class Templates extends BaseRunner {
 		unset($template_settings['conditions']);
 		$template_content['import_settings'] = $template_settings;
 
+		// Detect source-site links (e.g. Mega Menu / EA Info Box / Button URLs). When
+		// present, flag the template so the Finalizer picks it up and rewrites them to
+		// the real imported permalinks once every page exists (see Finalizer::prepare).
+		if ( $this->manifest['platform'] === 'elementor' && ! empty( $template_content['content'] ) ) {
+			if ( $this->json->replace_source_urls( $template_content['content'] ) > 0 ) {
+				$result['__link_rewrites'] = true;
+			}
+		}
+
 		if($this->platform === 'elementor' && $this->is_ai_content($id)){
 			$template_content['content'] = [];
 		}
@@ -143,94 +160,5 @@ class Templates extends BaseRunner {
 		}
 		$result['id'] = $template->get_main_id();
 		return $result;
-	}
-
-
-	/**
-	 * @param $template_settings
-	 * @param $platform
-	 *
-	 * @return false|int
-	 */
-	private function create_archive_page( $template_settings, $platform ) {
-		try {
-			$archive_page_id = $template_settings['page_settings']['archive_page_id'] ?? null;
-			if($archive_page_id && !empty($this->manifest['content']['page'][$archive_page_id])){
-				return false;
-			}
-
-			$type = $template_settings['type'];
-
-			$archive_page = wp_insert_post( [
-				'post_title'    => $template_settings['title'] ?? ucfirst( $type ) . ' - (by Templately)',
-				'post_status'   => 'publish',
-				'post_type'     => 'page',
-				'post_content'  => '',
-				'page_template' => $platform === 'elementor' ? 'elementor_header_footer' : PageTemplates::TEMPLATE_HEADER_FOOTER,
-			] );
-
-			if ( is_wp_error( $archive_page ) ) {
-				return false;
-			}
-
-			if($type === 'archive'){
-				Utils::update_option( 'page_for_posts', $archive_page );
-			}
-
-			if($type === 'product_archive'){
-				Utils::update_option( 'woocommerce_shop_page_id', $archive_page );
-			}
-
-			if($type === 'course_archive'){
-				// get page slug from $archive_page id and update learndash_settings_permalinks option to courses.
-				$post_name = get_post_field( 'post_name', $archive_page );
-
-				if(class_exists('\LearnDash_Settings_Section')){
-					$section   = \LearnDash_Settings_Section::get_section_instance( 'LearnDash_Settings_Section_Permalinks' );
-					if(!empty($section)){
-						$section->set_setting('courses', $post_name);
-						if(function_exists('learndash_setup_rewrite_flush')){
-							learndash_setup_rewrite_flush();
-						}
-					}
-				}
-			}
-
-			return $archive_page;
-		} catch ( \Exception $e ) {
-			return false;
-		}
-	}
-
-	/**
-	 * Only for gutenberg create a single page template.
-	 * @return void
-	 */
-	private function create_page_template() {
-		try {
-			$meta = [];
-			$data = [];
-
-			$post_data = [
-				'post_title'   => 'Single Page - (by Templately)',
-				'post_status'  => 'publish',
-				'post_type'    => 'templately_library',
-			];
-
-			if ( $this->manifest['platform'] == 'elementor' ) {
-				$meta['_wp_page_template'] = 'elementor_header_footer';
-				$data = json_decode('{"content":[{"id":"4a86515d","settings":[],"elements":[{"id":"30a46db1","settings":{"content_width":"full"},"elements":[],"isInner":false,"widgetType":"tl-post-content","elType":"widget"}],"isInner":false,"elType":"container"}],"settings":{"template":"elementor_header_footer"},"metadata":[]}', true);
-			} elseif ( $this->manifest['platform'] == 'gutenberg' ) {
-				$meta['_wp_page_template'] = PageTemplates::TEMPLATE_HEADER_FOOTER;
-				$data = ['content' => '<!-- wp:post-content /-->'];
-			}
-
-			$template = $this->factory->create( 'page_single', $post_data, $meta );
-			$template->import( $data );
-
-			// return $archive_page;
-		} catch ( \Exception $e ) {
-			return;
-		}
 	}
 }

@@ -512,7 +512,7 @@ class FullSiteImport extends Base {
 
 			// Filter Child Type for Elementor Pro Promotion Widget
 			if ( class_exists( '\Elementor\Plugin' ) ) {
-				add_filter( 'elementor/element/get_child_type', [ '\Templately\Core\Platform\Elementor', 'filter_child_type' ], 10, 3 );
+				\Templately\Core\Platform\Elementor::register_child_type_filter();
 			}
 
 			// Refresh progress after potential multisite creation
@@ -750,12 +750,6 @@ class FullSiteImport extends Base {
 			$this->throw($validation->get_error_message());
 		}
 
-		// Security: Validate file path is within WordPress upload directory before writing
-		$validation = AIUtils::validate_file_path($this->filePath);
-		if (is_wp_error($validation)) {
-			$this->throw($validation->get_error_message());
-		}
-
 		wp_mkdir_p(dirname($this->filePath));
 
 		if (file_put_contents($this->filePath, $response['body'])) { // phpcs:ignore
@@ -776,6 +770,12 @@ class FullSiteImport extends Base {
 		}
 		$unzip = unzip_file($this->filePath, $this->dir_path);
 		if (is_wp_error($unzip)) {
+			// Fall back to our own ZipArchive-based extractor. Some Templately
+			// packs carry entries with a leading "./" (or embedded "/./") path
+			// segment, which WordPress core's unzip_file() fails to extract.
+			// self::unzip_file() extracts with native ZipArchive and normalizes
+			// those "./" segments so the pack still imports. See
+			// self::unzip_file() for the extraction and path-traversal guard.
 			$unzip = $this->unzip_file($this->filePath, $this->dir_path);
 		}
 
@@ -868,30 +868,128 @@ class FullSiteImport extends Base {
 	/**
 	 * Unzip a specified ZIP file to a location on the Filesystem.
 	 *
+	 * Why this custom extractor exists: some Templately packs carry entries with
+	 * a leading "./" (or embedded "/./") path segment, which WordPress core's
+	 * unzip_file() fails to extract. This method extracts with PHP's native
+	 * ZipArchive and normalizes the redundant "./" segments (see
+	 * normalize_zip_entry_name()) so the pack still imports. It is a fallback:
+	 * self::unzip() only calls it after the core unzip_file() returns a WP_Error.
+	 *
+	 * Each archive member is validated before extraction rather than
+	 * calling ZipArchive::extractTo() blindly: entries that resolve outside the
+	 * destination (path traversal / "Zip Slip"), absolute paths, and Windows
+	 * drive-letter paths are skipped via validate_file(), mirroring the guard
+	 * WordPress core applies in _unzip_file_ziparchive(). Redundant "./" path
+	 * segments are normalized first so members land at their intended location.
+	 *
 	 * @param string $file Full path and filename of ZIP archive.
 	 * @param string $to Full path on the filesystem to extract archive to.
 	 * @return true|WP_Error True on success, WP_Error on failure.
 	 */
 	function unzip_file($file, $to) {
+		$zip = new \ZipArchive;
+
+		$res = $zip->open($file);
+		if ($res !== TRUE) {
+			return new \WP_Error('zip_error_' . $zip->status, $zip->getStatusString());
+		}
+
+		// Close the archive handle on every exit path (success, mid-loop
+		// exception, or early return) so it is never leaked.
 		try {
-			$zip = new \ZipArchive;
+			$to = trailingslashit($to);
 
-			$res = $zip->open($file);
-			if ($res === TRUE) {
-				$zip->extractTo($to);
-				$zip->close();
+			for ($i = 0; $i < $zip->numFiles; $i++) {
+				$name = $zip->getNameIndex($i);
+				if ($name === false) {
+					continue;
+				}
 
-				return true;
+				// Normalize redundant "./" segments so the destination path
+				// is computed from a clean entry name.
+				$name = $this->normalize_zip_entry_name($name);
+				if ($name === '') {
+					continue; // Archive root (e.g. a "./" entry).
+				}
+
+				// Skip the OS X-created __MACOSX directory.
+				if (strpos($name, '__MACOSX/') === 0) {
+					continue;
+				}
+
+				// Don't extract invalid files: reject "../" traversal,
+				// absolute, and drive-letter paths so no member can be
+				// written outside $to. Log the skipped entry name so a
+				// hostile or corrupt pack leaves a forensic trail rather
+				// than silently extracting only part of its contents.
+				if (0 !== validate_file($name)) {
+					Helper::log($name, 'unzip_file: skipped unsafe archive entry', 'warning');
+					continue;
+				}
+
+				if (substr($name, -1) === '/') {
+					// Directory entry.
+					wp_mkdir_p($to . untrailingslashit($name));
+					continue;
+				}
+
+				$contents = $zip->getFromIndex($i);
+				if ($contents === false) {
+					continue;
+				}
+
+				$target = $to . $name;
+				wp_mkdir_p(dirname($target));
+				file_put_contents($target, $contents); // phpcs:ignore
 			}
+
+			return true;
 		} catch (\Throwable $th) {
 			return new \WP_Error('exception_caught', $th->getMessage());
+		} finally {
+			$zip->close();
+		}
+	}
+
+	/**
+	 * Removes redundant current-directory ("./") segments from a ZIP entry path.
+	 *
+	 * Some archive tools store entry names with a leading "./" or embedded "/./"
+	 * segment (for example "./manifest.json" or "content/./page.json"). Parent
+	 * ("..") segments are intentionally left untouched so validate_file() can
+	 * still reject them.
+	 *
+	 * @param string $name A ZIP archive entry path.
+	 * @return string The entry path with current-directory segments removed.
+	 */
+	protected function normalize_zip_entry_name($name) {
+		// Fast path: bail when there is no current-directory segment to remove.
+		if ('.' !== $name
+			&& strpos($name, './') !== 0
+			&& strpos($name, '/./') === false
+			&& substr($name, -2) !== '/.'
+		) {
+			return $name;
 		}
 
-		if (isset($zip)) {
-			return new \WP_Error('zip_error_' . $zip->status, $zip->getStatusString());
-		} else {
-			return new \WP_Error('unknown_error', '');
+		// A trailing slash, or a trailing "/." or bare ".", denotes a directory.
+		$is_directory = substr($name, -1) === '/' || substr($name, -2) === '/.' || '.' === $name;
+
+		$segments = array();
+		foreach (explode('/', $name) as $segment) {
+			if ('.' !== $segment) {
+				$segments[] = $segment;
+			}
 		}
+
+		$name = implode('/', $segments);
+
+		// Preserve the trailing slash that marks a directory entry.
+		if ($is_directory && '' !== $name && substr($name, -1) !== '/') {
+			$name .= '/';
+		}
+
+		return $name;
 	}
 
 	/**
@@ -963,12 +1061,14 @@ class FullSiteImport extends Base {
 			$processed_pages = get_option("templately_ai_processed_pages", []);
 			$updated_ids = $processed_pages[$request_params['process_id']] ?? [];
 
-			// Use the static timeout-aware wait handler from AIUtils
+			// Use the static timeout-aware wait handler from AIUtils.
+			// ai_page_ids must be FLATTENED — the handler counts it against the
+			// number of processed pages (see AIUtils::flatten_ai_page_ids).
 			AIUtils::handle_sse_wait_with_timeout(
 				$this->session_id,
 				'ai_content_import_time',
 				$updated_ids,
-				$request_params['ai_page_ids'],
+				AIUtils::flatten_ai_page_ids($request_params['ai_page_ids']),
 				[$this, 'sse_message'],
 				[
 					'name' => 'ai-content',
@@ -1336,16 +1436,33 @@ class FullSiteImport extends Base {
 			$headers['x-templately-ai-updated-pages']   = implode(',', array_keys($updated_pages));
 			$headers['x-templately-ai-missing-pages']   = implode(',', array_diff($ai_page_ids, array_keys($updated_pages)));
 			$headers['x-templately-ai-credit-cost']     = $updated_ids['credit_cost'] ?? null;
+
+			// Phase-2 (chat-from-site): the backend keys the generated site by the
+			// conversation uuid — no download_key is minted for AI bundles. Forward
+			// it so the success/failed endpoints can flip the conversation status
+			// (delivered / error) and persist the failure. The uuid was stored under
+			// the process data when the import was prepared (chatbot-import-prepare).
+			$ai_process_data = AIUtils::get_ai_process_data_by_process_id($request_params['process_id']);
+			if (!empty($ai_process_data['chat_id'])) {
+				$headers['x-templately-ai-chat-uuid'] = $ai_process_data['chat_id'];
+			}
 		}
 
 
 		$extra_headers = $headers;
 
+		// Seconds the user spent idling in the customizer step, accumulated by
+		// the React import wizard. Sent so the backend can exclude it from the
+		// import-time metric (a customizer left open for hours would otherwise
+		// inflate the count). Absent for older clients, which the backend
+		// treats as zero idle.
+		$customizer_idle = isset($request_params['customizer_idle']) ? (int) $request_params['customizer_idle'] : 0;
+
 		if ($status === 'success') {
-			$body = ['type' => 'pack'];
+			$body = ['type' => 'pack', 'customizer_idle' => $customizer_idle];
 			$response = Helper::make_api_post_request('v1/import/success', $body, $extra_headers);
 		} elseif ($status === 'failed') {
-			$body = ['type' => 'pack', 'description' => $description ?: "Something Went wrong....."];
+			$body = ['type' => 'pack', 'description' => $description ?: "Something Went wrong.....", 'customizer_idle' => $customizer_idle];
 			$response = Helper::make_api_post_request('v1/import/failed', $body, $extra_headers);
 		}
 
@@ -1415,6 +1532,11 @@ class FullSiteImport extends Base {
 			// Get the latest AI process for the current API key
 			$last_ai_process = AIUtils::get_latest_ai_process_by_api_key($id);
 			if ($last_ai_process) {
+				// The cloud API key is stored on the process for server-side matching
+				// only. It must never reach the browser — under a global login it is
+				// the admin's credential, not the requesting user's.
+				unset($last_ai_process['api_key']);
+
 				$data['data']['ai_process'] = $last_ai_process;
 			}
 

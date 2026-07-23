@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
+class ComposerStaticInitad568afa13e8e1f4563c5a20d9d90f8f
 {
     public static $prefixLengthsPsr4 = array (
         'T' =>
@@ -41,6 +41,7 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
         'Templately\\API\\AIContent' => __DIR__ . '/../..' . '/includes/API/AIContent.php',
         'Templately\\API\\API' => __DIR__ . '/../..' . '/includes/API/API.php',
         'Templately\\API\\Categories' => __DIR__ . '/../..' . '/includes/API/Categories.php',
+        'Templately\\API\\Checkout' => __DIR__ . '/../..' . '/includes/API/Checkout.php',
         'Templately\\API\\Conditions' => __DIR__ . '/../..' . '/includes/API/Conditions.php',
         'Templately\\API\\Dependencies' => __DIR__ . '/../..' . '/includes/API/Dependencies.php',
         'Templately\\API\\FullSiteImport' => __DIR__ . '/../..' . '/includes/API/FullSiteImport.php',
@@ -90,6 +91,8 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
         'Templately\\Builder\\Types\\BaseTemplate' => __DIR__ . '/../..' . '/includes/Builder/Types/BaseTemplate.php',
         'Templately\\Builder\\Types\\CourseArchive' => __DIR__ . '/../..' . '/includes/Builder/Types/CourseArchive.php',
         'Templately\\Builder\\Types\\CourseSingle' => __DIR__ . '/../..' . '/includes/Builder/Types/CourseSingle.php',
+        'Templately\\Builder\\Types\\DocsArchive' => __DIR__ . '/../..' . '/includes/Builder/Types/DocsArchive.php',
+        'Templately\\Builder\\Types\\DocsSingle' => __DIR__ . '/../..' . '/includes/Builder/Types/DocsSingle.php',
         'Templately\\Builder\\Types\\Error' => __DIR__ . '/../..' . '/includes/Builder/Types/Error.php',
         'Templately\\Builder\\Types\\FluentProductSingle' => __DIR__ . '/../..' . '/includes/Builder/Types/FluentProductSingle.php',
         'Templately\\Builder\\Types\\Footer' => __DIR__ . '/../..' . '/includes/Builder/Types/Footer.php',
@@ -162,6 +165,7 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
         'Templately\\Core\\Importer\\Runners\\AIContent' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/AIContent.php',
         'Templately\\Core\\Importer\\Runners\\Attachments' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/Attachments.php',
         'Templately\\Core\\Importer\\Runners\\BaseRunner' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/BaseRunner.php',
+        'Templately\\Core\\Importer\\Runners\\CustomCSS' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/CustomCSS.php',
         'Templately\\Core\\Importer\\Runners\\Customizer' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/Customizer.php',
         'Templately\\Core\\Importer\\Runners\\Dependencies' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/Dependencies.php',
         'Templately\\Core\\Importer\\Runners\\DownloadZip' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/DownloadZip.php',
@@ -175,6 +179,7 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
         'Templately\\Core\\Importer\\Runners\\WPContent' => __DIR__ . '/../..' . '/includes/Core/Importer/Runners/WPContent.php',
         'Templately\\Core\\Importer\\URL' => __DIR__ . '/../..' . '/includes/Core/Importer/URL.php',
         'Templately\\Core\\Importer\\Utils\\AIContentHelper' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/AIContentHelper.php',
+        'Templately\\Core\\Importer\\Utils\\AIContentResolver' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/AIContentResolver.php',
         'Templately\\Core\\Importer\\Utils\\AIUtils' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/AIUtils.php',
         'Templately\\Core\\Importer\\Utils\\ElementorHelper' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/ElementorHelper.php',
         'Templately\\Core\\Importer\\Utils\\ElementorSettingsMerger' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/ElementorSettingsMerger.php',
@@ -183,6 +188,8 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
         'Templately\\Core\\Importer\\Utils\\GutenbergSettingsMerger' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/GutenbergSettingsMerger.php',
         'Templately\\Core\\Importer\\Utils\\ImportHelper' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/ImportHelper.php',
         'Templately\\Core\\Importer\\Utils\\LogHandler' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/LogHandler.php',
+        'Templately\\Core\\Importer\\Utils\\Providers\\ChatAIContentProvider' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/Providers/ChatAIContentProvider.php',
+        'Templately\\Core\\Importer\\Utils\\Providers\\ClassicAIContentProvider' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/Providers/ClassicAIContentProvider.php',
         'Templately\\Core\\Importer\\Utils\\SessionData' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/SessionData.php',
         'Templately\\Core\\Importer\\Utils\\SignatureVerifier' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/SignatureVerifier.php',
         'Templately\\Core\\Importer\\Utils\\Utils' => __DIR__ . '/../..' . '/includes/Core/Importer/Utils/Utils.php',
@@ -208,9 +215,9 @@ class ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitfbda63c7fbea4382c611c6bde8fe57fa::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitad568afa13e8e1f4563c5a20d9d90f8f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitad568afa13e8e1f4563c5a20d9d90f8f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitad568afa13e8e1f4563c5a20d9d90f8f::$classMap;
 
         }, null, ClassLoader::class);
     }
